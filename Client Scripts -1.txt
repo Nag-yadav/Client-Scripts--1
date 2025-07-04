@@ -1,0 +1,50 @@
+
+CLIENT SCRIPTS CLASS - 1:-
+
+
+function onLoad() {
+    //Type appropriate comment here, and begin script below
+    // g_form.addInfoMessage('Hello Nag!!');
+    // g_form.addErrorMessage("There is an error in the form.Please check it");
+    // g_form.clearMessages();
+    // g_form.addOption('category', 'security', 'Security');
+    // g_form.removeOption('contact_type chat');
+    // g_form.clearOptions('state');
+    // g_form.disableAttachments();
+    // g_form.enableAttachments();
+    // g_form.setMandatory('short_description',true);
+    //  g_form.setReadOnly('contact_type',true);
+    // g_form.setVisible('cmdb_ci',false);
+    //g_form.setDisplay('assigned_to',false);
+    // alert(g_form.getSectionNames());
+    // g_form.setSectionDisplay('resolution_information',false);
+    // g_form.hideRelatedList('task_sla');
+    // g_form.hideRelatedLists();
+    // g_form.showRelatedLists();
+    //alert(g_form.isNewRecord());
+    // var n = g_form.getValue('caller_id');
+    // alert(n);
+
+    //dot walking:-
+    // var nag = g_form.getReference('caller_id');
+    // var mail = nag.email;
+    // alert(mail);
+
+    // var nag = g_form.getReference('caller_id');
+    // var dp = nag.department.name;  
+    // alert(dp);	
+    // (note: multiple level dot walking is not possible in client scripts but possible in server scripts)
+
+
+    // g_form.setValue('short_description', 'hello nag..');
+
+
+	// var nag = g_form.getReference('caller_id');
+    // var dp = nag.email;
+	// g_form.setValue('short_description',dp);
+
+
+	// var nag = g_form.getReference('caller_id');
+    // var dp = nag.email;
+	// g_form.setValue('assignment_group','Software');
+}
