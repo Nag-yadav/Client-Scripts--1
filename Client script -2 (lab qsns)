@@ -1,0 +1,16 @@
+1.Populates the logged-in user automatically in the caller field only for new Records.
+
+if(g_form.isNewRecord()){
+		g_form.setValue('caller_id',g_user.userID);
+	}
+
+
+2. If a logged in user has an itil role, make the description ,channel mandatory.
+
+if(g_user.hasRoleExactly('itil')){
+		g_form.setMandatory('contact_type',true);
+		g_form.setMandatory('description',true);
+	}
+
+
+
