@@ -1,0 +1,9 @@
+// alert(g_user.hasRole('itil'));
+	// alert(g_user.hasRoleExactly('itil'));
+	// alert(g_user.hasRoleFromList('itil','itil_admin','xyz'));
+	// alert(g_user.hasRoles());
+	// alert(g_user.userID);
+	// alert(g_user.getFullName());
+
+
+	//these are api's used as logged in user
