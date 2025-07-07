@@ -1,1 +1,22 @@
-hi..
+When a form loads and the category is "Hardware", you want to make the "state" field mandatory. How?
+
+function onLoad() {
+    var category = g_form.getValue('category');
+    if (category == 'hardware') {
+        g_form.setMandatory('state', true);
+    }
+
+}
+-------------------------------------------------------------------------------------------------------------------------------
+Hide the "Work Notes" field for users not in the "ITIL" role.
+if(!g_user.hasRoleExactly('itil')){
+		g_form.setDisplay('work_notes',false);
+	}
+
+------------------------------------------------------------------------------------------------------------------------------
+On the Incident form, make the Caller field read-only for all users except admins.
+if(!g_user.hasRole('admin')){
+		g_form.setReadOnly('caller_id',true);
+	}
+
+----------------------------------------------------------------------------------------------------------------------------------
