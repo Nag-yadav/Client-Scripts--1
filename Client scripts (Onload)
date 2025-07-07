@@ -1,0 +1,82 @@
+-----------------------------------------------------------------------------------------------------------------------------------
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (isLoading || newValue === '') {
+      return;
+   }
+
+   //Type appropriate comment here, and begin script below
+	alert(newValue);
+	alert(oldValue);
+   
+}
+--------------------------------------------------------------------------------------------------------------------------------------
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (isLoading || newValue === '') {
+	alert('it is onload');
+      return;
+   }
+	alert('it is onchange');
+   
+}
+------------------------------------------------------------------------------------------------------------------------------------
+7.Hide task SLA related list in the incident for category network records.(if works on change)
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading || newValue === '') {
+        return;
+    }
+	if(newValue=='network'){
+		g_form.hideRelatedList('task_sla');
+
+	}else{
+		g_form.showRelatedList('task_sla');
+	}
+}
+
+------------------------------------------
+//(if it wants to work on load)
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading || oldValue === 'network') {
+        g_form.hideRelatedList('task_sla');
+        return;
+    }
+    if (newValue == 'network') {
+        g_form.hideRelatedList('task_sla');
+
+    } else {
+        g_form.showRelatedList('task_sla');
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+14. Restrict form submission if the assignment group and assigned to is not filled.
+
+function onSubmit() {
+    var assignmtGroup = g_form.getValue('assignment_group');
+    if (assignmtGroup == '') {
+        alert('please fill assignment group');
+        return false;
+    }
+
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
