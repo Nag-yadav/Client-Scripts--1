@@ -102,8 +102,19 @@ function onSubmit() {
   return true;
 }
 -------------------------------------------------------------------------------------------------------------------------------
+Block form submission if Caller and Assigned To are same
 
 
+function onSubmit() {
+  var caller = g_form.getValue('caller_id');
+  var assignedTo = g_form.getValue('assigned_to');
+
+  if (caller == assignedTo) {
+    g_form.addErrorMessage('Caller and Assigned To cannot be the same.');
+    return false;
+  }
+  return true;
+}
 
 
 
