@@ -1,3 +1,6 @@
+ONLOAD SCENARIOS:--
+--------------------------------------------------------------------------------------------------------------------------
+
 When a form loads and the category is "Hardware", you want to make the "state" field mandatory. How?
 
 function onLoad() {
@@ -44,10 +47,46 @@ function onLoad() {
     g_form.setDisplay('state', false);
   }
 }
+
+
+
 ----------------------------------------------------------------------------------------------------------------------------------
+ONCHANGE SCENARIOS :--
+----------------------------------------------------------------------------------------------------------------------------------
+When the user selects Urgency = High, show a warning message to alert them.
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (isLoading || newValue === '') {
+      return;
+   }
+
+   if(newValue=='1'){
+	g_form.showFieldMsg('urgency','Please confirm this msg is correct','warning');
+   }
+   
+}
 
 
+----------------------------------------------------------------------------------------------------------------------
+When Category is set to Inquiry, disable the Impact field.
 
+if(newValue=='inquiry'){
+		g_form.setDisabled('impact',true);
+	}else{
+		g_form.setDisabled('impact',false);
+	}
+------------------------------------------------------------------------------------------------------------------------
+If Category is not empty, make Subcategory mandatory.
+
+function onChange(control, oldValue, newValue, isLoading) {
+  if (isLoading) return;
+
+  if (newValue != '') {
+    g_form.setMandatory('subcategory', true);
+  } else {
+    g_form.setMandatory('subcategory', false);
+  }
+}
 
 
 
