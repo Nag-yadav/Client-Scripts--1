@@ -9,14 +9,52 @@ function onLoad() {
 }
 -------------------------------------------------------------------------------------------------------------------------------
 Hide the "Work Notes" field for users not in the "ITIL" role.
+
+function onload(){
 if(!g_user.hasRoleExactly('itil')){
 		g_form.setDisplay('work_notes',false);
 	}
-
+}
 ------------------------------------------------------------------------------------------------------------------------------
 On the Incident form, make the Caller field read-only for all users except admins.
+
+function onload(){
 if(!g_user.hasRole('admin')){
 		g_form.setReadOnly('caller_id',true);
 	}
-
+}
 ----------------------------------------------------------------------------------------------------------------------------------
+ If the Impact is “High” and the Category is “Hardware”, make “Model Number” and “Serial Number” mandatory.
+
+function onload(){
+var impact = g_form.getValue('impact');
+	var cate = g_form.getValue('category');
+	if(impact=='1' && cate =='hardware'){
+		g_form.setMandatory('u_model_number',true);
+		g_form.setMandatory('u_serial_number',true);
+	}
+}
+-----------------------------------------------------------------------------------------------------------------------------------
+
+ Hide the State field for users with role "itil".
+
+
+function onLoad() {
+  if (g_user.hasRole('itil')) {
+    g_form.setDisplay('state', false);
+  }
+}
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
