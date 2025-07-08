@@ -87,6 +87,21 @@ function onChange(control, oldValue, newValue, isLoading) {
     g_form.setMandatory('subcategory', false);
   }
 }
+----------------------------------------------------------------------------------------------------------------------------
+
+ONSUBMIT SCENARIOS:--
+------------------------------------------------------------------------------------------------------------------------------
+Don’t allow form submission if Short Description is blank or less than 5 characters.
+
+function onSubmit() {
+  var desc = g_form.getValue('short_description');
+  if (desc == '' || desc.length < 5) {
+    g_form.addErrorMessage('Short Description must be at least 5 characters.');
+    return false;
+  }
+  return true;
+}
+-------------------------------------------------------------------------------------------------------------------------------
 
 
 
