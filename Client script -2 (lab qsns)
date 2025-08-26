@@ -4,13 +4,44 @@ if(g_form.isNewRecord()){
 		g_form.setValue('caller_id',g_user.userID);
 	}
 
-
+-----------------------------------------------------------------------------------------------
 2. If a logged in user has an itil role, make the description ,channel mandatory.
 
 if(g_user.hasRoleExactly('itil')){
 		g_form.setMandatory('contact_type',true);
 		g_form.setMandatory('description',true);
 	}
+-------------------------------------------------------------------------------------------------------------
+10.If a user changes the caller in the incident form : Description should be the incident is 
+created by the user : caller full name, cmdb mandatory,state should be in progress.
 
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading || newValue === '') return;
 
+	
+    // Update Description with the caller's sys_id (since name may not always be available)
+	var cal=g_form.getReference("caller_id");
+	var caller= cal.name;
+    g_form.setValue('description', 'The incident is created by the user : ' + caller);
 
+    // Make CMDB field mandatory
+    g_form.setMandatory('cmdb_ci', true);
+
+    // Set state to "In Progress"
+    g_form.setValue('state', '2');
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+29. When an incident is assignedTo someone show an alert message(this ticket is assigned to the assigned name).
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (isLoading || newValue == '') {
+        return;
+    }
+
+    var assignedName = g_form.getReference('assigned_to');
+    var assign = assignedName.name;
+    alert("This ticket is assigned to: " + assign);
+}
+--------------------------------------------------------------------------------------------------------------
+32. Take two fields Requested For and Manager, If requested for selected Manager should populate accordingly.
