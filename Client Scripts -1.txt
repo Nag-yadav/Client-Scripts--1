@@ -24,27 +24,76 @@ function onLoad() {
     //alert(g_form.isNewRecord());
     // var n = g_form.getValue('caller_id');
     // alert(n);
-
+--------------------------------------------------------------------------------------------------------------------------
     //dot walking:-
     // var nag = g_form.getReference('caller_id');
     // var mail = nag.email;
     // alert(mail);
-
+-----------------------------------------------------------------------------------------------------------------------
     // var nag = g_form.getReference('caller_id');
     // var dp = nag.department.name;  
     // alert(dp);	
     // (note: multiple level dot walking is not possible in client scripts but possible in server scripts)
 
-
+---------------------------------------------------------------------------------------------------------------------
     // g_form.setValue('short_description', 'hello nag..');
-
+-------------------------------------------------------------------------------------------------------------------
 
 	// var nag = g_form.getReference('caller_id');
     // var dp = nag.email;
 	// g_form.setValue('short_description',dp);
-
+---------------------------------------------------------------------------------------------------------------------
 
 	// var nag = g_form.getReference('caller_id');
     // var dp = nag.email;
 	// g_form.setValue('assignment_group','Software');
+
+}
+--------------------------------------------------------------------------------------------------------------
+1). get logged in user details (dot walking):-
+
+table: incident
+type: onload
+
+
+function onLoad() {
+    
+    if (g_form.isNewRecord()) {
+        g_form.setValue('caller_id', g_user.userID);
+
+        var em = g_form.getReference('caller_id').email;
+        var loc = g_form.getReference('caller_id').location;
+        var dept = g_form.getReference('caller_id').department;
+
+		g_form.setValue('u_email',em);
+		g_form.setValue('u_location',loc);
+		g_form.setValue('u_department',dept);
+
+    }
+
+}  //in this case the form is waiting for 2,3 seconds , if i dont want to wait, see below code
+--------------------------------------------------------------------------------------------------------------
+2).
+
+function onLoad() {
+
+    if (g_form.isNewRecord()) {
+        g_form.setValue('caller_id', g_user.userID);
+
+        // var em = g_form.getReference('caller_id').email;
+        // var loc = g_form.getReference('caller_id').location;
+        // var dept = g_form.getReference('caller_id').department;
+
+        var cal = g_form.getReference('caller_id', callback);
+
+        function callback(cal) {
+
+            g_form.setValue('u_email', cal.email);
+            g_form.setValue('u_location', cal.location);
+            g_form.setValue('u_department', cal.department);
+
+        }
+
+    }
+
 }
