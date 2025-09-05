@@ -97,3 +97,47 @@ function onLoad() {
     }
 
 }
+-------------------------------------------------------------------------------------------------------------------
+Above qsn in Onload :--
+
+table: incident
+type: onload
+field : caller
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (newValue === '') {
+        g_form.clearValue('u_email');
+        g_form.clearValue('u_location');
+        g_form.clearValue('u_department');
+        return;
+    }
+
+    var cal = g_form.getReference('caller_id', callerD);
+
+    function callerD(cal) {
+        g_form.setValue('u_email', cal.email);
+        g_form.setValue('u_location', cal.location);
+        g_form.setValue('u_department', cal.department);
+    }
+
+}
+---------------------------------------------------------------------------------------------------
+Autopopulate assign to field when a configuration item is selected something:
+
+table : incident
+type: onload
+field: configuration item
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (newValue === '') {
+        g_form.clearValue('assigned_to');
+        return;
+    }
+
+    var ci = g_form.getReference('cmdb_ci', callb)
+
+    function callb(ci) {
+        g_form.setValue('assigned_to', ci.assigned_to);
+    }
+
+}
