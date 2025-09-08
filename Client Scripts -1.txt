@@ -101,7 +101,7 @@ function onLoad() {
 Above qsn in Onload :--
 
 table: incident
-type: onload
+type: onchange
 field : caller
 
 function onChange(control, oldValue, newValue, isLoading, isTemplate) {
@@ -125,7 +125,7 @@ function onChange(control, oldValue, newValue, isLoading, isTemplate) {
 Autopopulate assign to field when a configuration item is selected something:
 
 table : incident
-type: onload
+type: onchange
 field: configuration item
 
 function onChange(control, oldValue, newValue, isLoading, isTemplate) {
@@ -141,3 +141,4 @@ function onChange(control, oldValue, newValue, isLoading, isTemplate) {
     }
 
 }
+
