@@ -141,4 +141,60 @@ function onChange(control, oldValue, newValue, isLoading, isTemplate) {
     }
 
 }
+---------------------------------------------------------------------------------------------------
+Autopopulate caller details when caller is selected someone:
+Script Include:--
 
+name : CallerDetails
+glideajax enabled : yes
+
+
+var CallerDetails = Class.create();
+CallerDetails.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+    getCallerDetails: function() {
+        var gr = new GlideRecord('sys_user');
+        // gr.addQuery('name', 'Lucius Bagnoli');
+		gr.addQuery('sys_id',this.getParameter('sysparm_caller'));
+        gr.query();
+
+        var callstr = '';
+        if (gr.next()) {
+            callstr = gr.getValue('email') + ':' + gr.getValue('location') + ':' + gr.getValue('department');
+        }
+        return callstr;
+    },
+
+    type: 'CallerDetails'
+});
+
+
+client script:-
+name: PopulateCallerValues
+table: incident
+type: onchange
+field name: caller
+
+function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+    if (newValue === '') {
+        g_form.clearValue('u_email');
+        g_form.clearValue('u_location');
+        g_form.clearValue('u_department');
+        return;
+    }
+
+    var ga = new GlideAjax('CallerDetails');
+    ga.addParam('sysparm_name', 'getCallerDetails');
+    ga.addParam('sysparm_caller', g_form.getValue('caller_id'));
+    ga.getXMLAnswer(getCallerDetails);
+
+    function getCallerDetails(cal) {
+        
+		var caller = cal.split(':');
+        g_form.setValue('u_email', caller[0]);
+        g_form.setValue('u_location', caller[1]);
+        g_form.setValue('u_department', caller[2]);
+    }
+
+}
+
+--------------------------------------------------------------------------------------------------------------------
